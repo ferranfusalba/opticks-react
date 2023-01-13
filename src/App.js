@@ -3,9 +3,9 @@ import './App.css';
 import { Route, Routes, Link } from "react-router-dom"
 
 // Views
-import HomeView from "./components/Home/Home"
-import DasboardView from "./components/Dashboard/Dashboard"
-import FraudAnalysisView from "./components/FraudAnalysis/FraudAnalysis"
+import HomeView from "./views/Home/Home"
+import DasboardView from "./views/Dashboard/Dashboard"
+import FraudAnalysisView from "./views/FraudAnalysis/FraudAnalysis"
 
 function App() {
   return (
