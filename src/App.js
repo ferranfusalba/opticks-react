@@ -4,7 +4,7 @@ import { Route, Routes, Link } from "react-router-dom"
 
 // Views
 import HomeView from "./views/Home/Home"
-import DasboardView from "./views/Dashboard/Dashboard"
+import DashboardView from "./views/Dashboard/Dashboard"
 import FraudAnalysisView from "./views/FraudAnalysis/FraudAnalysis"
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<HomeView />} />
-        <Route path="/dashboard" element={<DasboardView />} />
+        <Route path="/dashboard" element={<DashboardView />} />
         <Route path="/fraud-analysis" element={<FraudAnalysisView />} />
       </Routes>
     </div>
