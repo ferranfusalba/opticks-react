@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default function FraudAnalysisView() {
+function FraudAnalysisView() {
     return (
         <h1>Fraud Analysis View</h1>
     );
 }
+
+export default FraudAnalysisView;

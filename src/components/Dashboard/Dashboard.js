@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default function DashboardView() {
+function DasboardView() {
     return (
         <h1>Dashboard View</h1>
     );
 }
+
+export default DasboardView;
