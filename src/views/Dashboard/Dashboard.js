@@ -1,5 +1,6 @@
 // React
 import React, { useEffect, useState } from 'react';
+import Savings from '../../components/Savings/Savings';
 
 function DashboardView() {
     const [data, setData] = useState(null);
@@ -8,77 +9,128 @@ function DashboardView() {
 
     // Stats
     // today
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const response = await fetch(
+    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=today`
+    //             );
+    //             if (!response.ok) {
+    //                 throw new Error(
+    //                     `This is an HTTP error: The status is ${response.status}`
+    //                 );
+    //             }
+    //             let actualData = await response.json();
+    //             setData(actualData);
+    //             setError(null);
+    //         } catch (err) {
+    //             setError(err.message);
+    //             setData(null);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
+    //     getData()
+    // }, [])
+
+    // yesterday
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const response = await fetch(
+    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=yesterday`
+    //             );
+    //             if (!response.ok) {
+    //                 throw new Error(
+    //                     `This is an HTTP error: The status is ${response.status}`
+    //                 );
+    //             }
+    //             let actualData = await response.json();
+    //             setData(actualData);
+    //             setError(null);
+    //         } catch (err) {
+    //             setError(err.message);
+    //             setData(null);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
+    //     getData()
+    // }, [])
+
+    // last_7_days
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const response = await fetch(
+    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_7_days`
+    //             );
+    //             if (!response.ok) {
+    //                 throw new Error(
+    //                     `This is an HTTP error: The status is ${response.status}`
+    //                 );
+    //             }
+    //             let actualData = await response.json();
+    //             setData(actualData);
+    //             setError(null);
+    //         } catch (err) {
+    //             setError(err.message);
+    //             setData(null);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
+    //     getData()
+    // }, [])
+
+    // last_30_days
     useEffect(() => {
-        fetch(`https://us-central1-opticks-test.cloudfunctions.net/stats?range=today`)
-            .then((response) => {
+        const getData = async () => {
+            try {
+                const response = await fetch(
+                    `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_30_days`
+                );
                 if (!response.ok) {
                     throw new Error(
                         `This is an HTTP error: The status is ${response.status}`
                     );
                 }
-                return response.json();
-            })
-            .then((actualData) => {
-                console.log('Stats - today', actualData);
+                let actualData = await response.json();
                 setData(actualData);
                 setError(null);
-            })
-            .catch((err) => {
+            } catch (err) {
                 setError(err.message);
                 setData(null);
-            })
-            .finally(() => {
+            } finally {
                 setLoading(false);
-            });
-    }, []);
-
-    // yesterday
-    useEffect(() => {
-        fetch(`https://us-central1-opticks-test.cloudfunctions.net/stats?range=yesterday`)
-            .then((response) => response.json())
-            .then((actualData) => console.log('Stats - yesterday', actualData))
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, []);
-
-    // last_7_days
-    useEffect(() => {
-        fetch(`https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_7_days`)
-            .then((response) => response.json())
-            .then((actualData) => console.log('Stats - last_7_days', actualData))
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, []);
-
-    // last_30_days
-    useEffect(() => {
-        fetch(`https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_30_days`)
-            .then((response) => response.json())
-            .then((actualData) => console.log('Stats - last_30_days', actualData))
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, []);
-
-    // Savings
-    useEffect(() => {
-        fetch(`https://us-central1-opticks-test.cloudfunctions.net/savings`)
-            .then((response) => response.json())
-            .then((actualData) => console.log('Savings', actualData))
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, []);
+            }
+        }
+        getData()
+    }, [])
 
     return (
         <>
             <h1>Dashboard View</h1>
+            <Savings />
             {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
+            {data &&
+                data.map(({ day, risk, threats, total }) => (
+                    <div key={day}>
+                        <p><b>day:</b> {day}</p>
+                        <p>risk.invalid: {risk.invalid}</p>
+                        <p>risk.legitimate: {risk.legitimate}</p>
+                        <p>risk.suspicious: {risk.suspicious}</p>
+                        <p>threats.BadBot: {threats.BadBot}</p>
+                        <p>threats.DataTampering: {threats.DataTampering}</p>
+                        <p>threats.NonCompliantTraffic: {threats.NonCompliantTraffic}</p>
+                        <p>threats.StatisticalOutliers: {threats.StatisticalOutliers}</p>
+                        <p>threats.TelemetryMissing: {threats.TelemetryMissing}</p>
+                        <h3>total: {total}</h3>
+                    </div>
+                ))}
         </>
     );
 }
