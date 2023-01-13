@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .875rem 1rem;
+    box-shadow: 0rem .125rem .1875rem rgba(0, 0, 0, 0.1);
+    img {
+        max-width: 7rem;
+    }
+    p {
+        font: {
+            size: .75rem;
+        }
+    }
+}

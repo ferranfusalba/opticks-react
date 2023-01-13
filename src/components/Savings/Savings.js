@@ -1,6 +1,8 @@
 // React
 import { useEffect, useState } from 'react';
 
+import "./Savings.scss"
+
 function SavingsComponent() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -31,7 +33,7 @@ function SavingsComponent() {
     }, [])
 
     return (
-        <>
+        <div className="savings">
             <h1>Savings Component</h1>
             {loading && <div>A moment please...</div>}
             {error && (
@@ -42,7 +44,7 @@ function SavingsComponent() {
                 <p>last30days: {data.last30days}</p>
                 <p>next30days: {data.next30days}</p>
             </div>}
-        </>
+        </div>
     )
 }
 
