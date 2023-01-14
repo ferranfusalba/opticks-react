@@ -1,3 +1,47 @@
 .fraud-analysis {
-  
+  // Range
+  // Widgets
+  & > *:nth-child(2) {
+    // Savings Widget
+    & > *:nth-child(1) {
+      main {
+        // Shared styles on three data containers
+        span {
+          font: {
+            size: 0.875rem;
+            weight: 300;
+          }
+        }
+        // Specific styles by each container
+        section:nth-child(1) {
+          text-align: center;
+          &:not(span) {
+            font: {
+              size: 2.25rem;
+              weight: 700;
+            }
+          }
+        }
+        section:nth-child(2) {
+          display: flex;
+          flex-direction: row;
+          & > * {
+            width: 50%;
+            &:nth-child(1) {
+              text-align: center;
+            }
+          }
+          span {
+            color: #757575;
+          }
+          &:not(span) {
+            font: {
+              size: 1.5rem;
+              weight: 300;
+            }
+          }
+        }
+      }
+    }
+  }
 }

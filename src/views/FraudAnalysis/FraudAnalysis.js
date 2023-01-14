@@ -38,7 +38,7 @@ function FraudAnalysisView() {
   }, []);
 
   return (
-    <div>
+    <div className="fraud-analysis">
       <Range />
       <Widgets>
         <Widget title={"Savings"}>
