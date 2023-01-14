@@ -1,0 +1,11 @@
+.central {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0.125rem 0.125rem 0.5rem rgba(11, 18, 24, 0.1);
+  border-radius: 0.3125rem;
+  p {
+    color: #8e8e8e;
+  }
+}
