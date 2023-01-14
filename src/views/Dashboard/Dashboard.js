@@ -1,128 +1,128 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import "./Dashboard.scss"
+import "./Dashboard.scss";
 
 // Components
-import Widget from '../../components/Widget/Widget';
-import Range from '../../components/Range/Range';
-import Widgets from '../../components/Widgets/Widgets';
-import CentralContent from '../../components/CentralContent/CentralContent';
+import Widget from "../../components/Widget/Widget";
+import Range from "../../components/Range/Range";
+import CentralContent from "../../components/CentralContent/CentralContent";
 
 function DashboardView() {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    // Stats
-    // today
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=today`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error(
-    //                     `This is an HTTP error: The status is ${response.status}`
-    //                 );
-    //             }
-    //             let actualData = await response.json();
-    //             setData(actualData);
-    //             setError(null);
-    //         } catch (err) {
-    //             setError(err.message);
-    //             setData(null);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     }
-    //     getData()
-    // }, [])
+  // Stats
+  // today
+  // useEffect(() => {
+  //     const getData = async () => {
+  //         try {
+  //             const response = await fetch(
+  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=today`
+  //             );
+  //             if (!response.ok) {
+  //                 throw new Error(
+  //                     `This is an HTTP error: The status is ${response.status}`
+  //                 );
+  //             }
+  //             let actualData = await response.json();
+  //             setData(actualData);
+  //             setError(null);
+  //         } catch (err) {
+  //             setError(err.message);
+  //             setData(null);
+  //         } finally {
+  //             setLoading(false);
+  //         }
+  //     }
+  //     getData()
+  // }, [])
 
-    // yesterday
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=yesterday`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error(
-    //                     `This is an HTTP error: The status is ${response.status}`
-    //                 );
-    //             }
-    //             let actualData = await response.json();
-    //             setData(actualData);
-    //             setError(null);
-    //         } catch (err) {
-    //             setError(err.message);
-    //             setData(null);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     }
-    //     getData()
-    // }, [])
+  // yesterday
+  // useEffect(() => {
+  //     const getData = async () => {
+  //         try {
+  //             const response = await fetch(
+  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=yesterday`
+  //             );
+  //             if (!response.ok) {
+  //                 throw new Error(
+  //                     `This is an HTTP error: The status is ${response.status}`
+  //                 );
+  //             }
+  //             let actualData = await response.json();
+  //             setData(actualData);
+  //             setError(null);
+  //         } catch (err) {
+  //             setError(err.message);
+  //             setData(null);
+  //         } finally {
+  //             setLoading(false);
+  //         }
+  //     }
+  //     getData()
+  // }, [])
 
-    // last_7_days
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_7_days`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error(
-    //                     `This is an HTTP error: The status is ${response.status}`
-    //                 );
-    //             }
-    //             let actualData = await response.json();
-    //             setData(actualData);
-    //             setError(null);
-    //         } catch (err) {
-    //             setError(err.message);
-    //             setData(null);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     }
-    //     getData()
-    // }, [])
+  // last_7_days
+  // useEffect(() => {
+  //     const getData = async () => {
+  //         try {
+  //             const response = await fetch(
+  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_7_days`
+  //             );
+  //             if (!response.ok) {
+  //                 throw new Error(
+  //                     `This is an HTTP error: The status is ${response.status}`
+  //                 );
+  //             }
+  //             let actualData = await response.json();
+  //             setData(actualData);
+  //             setError(null);
+  //         } catch (err) {
+  //             setError(err.message);
+  //             setData(null);
+  //         } finally {
+  //             setLoading(false);
+  //         }
+  //     }
+  //     getData()
+  // }, [])
 
-    // last_30_days
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await fetch(
-                    `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_30_days`
-                );
-                if (!response.ok) {
-                    throw new Error(
-                        `This is an HTTP error: The status is ${response.status}`
-                    );
-                }
-                let actualData = await response.json();
-                setData(actualData);
-                setError(null);
-            } catch (err) {
-                setError(err.message);
-                setData(null);
-            } finally {
-                setLoading(false);
-            }
+  // last_30_days
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_30_days`
+        );
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
         }
-        getData()
-    }, [])
+        let actualData = await response.json();
+        setData(actualData);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
-    return (
-        <div>
-            <Range />
-            <Widgets>
-                <Widget />
-            </Widgets>
-            <CentralContent title={'Other Widgets'}/>
-            {/* {loading && <div>A moment please...</div>}
+  return (
+    <div className="dashboard">
+      <Range />
+      <div className="dashboard__widgets">
+        <Widget title={"Invalid Traffic over time"} />
+        <Widget title={"Traffic Veracity"} />
+      </div>
+      <CentralContent title={"Other Widgets"} />
+      {/* {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
@@ -141,8 +141,8 @@ function DashboardView() {
                         <h3>total: {total}</h3>
                     </div>
                 ))} */}
-        </div>
-    );
+    </div>
+  );
 }
 
 export default DashboardView;

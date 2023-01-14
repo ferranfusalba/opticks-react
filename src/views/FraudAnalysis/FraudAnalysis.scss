@@ -1,7 +1,13 @@
 .fraud-analysis {
   // Range
   // Widgets
-  & > *:nth-child(2) {
+  &__widgets {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    & > * {
+      width: 33%;
+    }
     // Savings Widget
     & > *:nth-child(1) {
       main {

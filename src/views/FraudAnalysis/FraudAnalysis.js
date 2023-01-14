@@ -5,7 +5,6 @@ import "./FraudAnalysis.scss";
 
 import Widget from "../../components/Widget/Widget";
 import Range from "../../components/Range/Range";
-import Widgets from "../../components/Widgets/Widgets";
 import CentralContent from "../../components/CentralContent/CentralContent";
 
 function FraudAnalysisView() {
@@ -40,7 +39,7 @@ function FraudAnalysisView() {
   return (
     <div className="fraud-analysis">
       <Range />
-      <Widgets>
+      <div className="fraud-analysis__widgets">
         <Widget title={"Savings"}>
           {loading && <div>A moment please...</div>}
           {error && (
@@ -70,7 +69,8 @@ function FraudAnalysisView() {
         </Widget>
         <Widget title={"Traffic Veracity"}></Widget>
         <Widget title={"Threat Distribution"}></Widget>
-      </Widgets>
+      </div>
+      <Range />
       <CentralContent title={"The Table"} />
     </div>
   );
