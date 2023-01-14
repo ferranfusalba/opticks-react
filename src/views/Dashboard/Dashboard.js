@@ -9,92 +9,17 @@ import Range from "../../components/Range/Range";
 import CentralContent from "../../components/CentralContent/CentralContent";
 
 function DashboardView() {
-  const [data, setData] = useState(null);
+  const [threatsData, setThreatsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [range, setRange] = useState("today");
 
   // Stats
-  // today
-  // useEffect(() => {
-  //     const getData = async () => {
-  //         try {
-  //             const response = await fetch(
-  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=today`
-  //             );
-  //             if (!response.ok) {
-  //                 throw new Error(
-  //                     `This is an HTTP error: The status is ${response.status}`
-  //                 );
-  //             }
-  //             let actualData = await response.json();
-  //             setData(actualData);
-  //             setError(null);
-  //         } catch (err) {
-  //             setError(err.message);
-  //             setData(null);
-  //         } finally {
-  //             setLoading(false);
-  //         }
-  //     }
-  //     getData()
-  // }, [])
-
-  // yesterday
-  // useEffect(() => {
-  //     const getData = async () => {
-  //         try {
-  //             const response = await fetch(
-  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=yesterday`
-  //             );
-  //             if (!response.ok) {
-  //                 throw new Error(
-  //                     `This is an HTTP error: The status is ${response.status}`
-  //                 );
-  //             }
-  //             let actualData = await response.json();
-  //             setData(actualData);
-  //             setError(null);
-  //         } catch (err) {
-  //             setError(err.message);
-  //             setData(null);
-  //         } finally {
-  //             setLoading(false);
-  //         }
-  //     }
-  //     getData()
-  // }, [])
-
-  // last_7_days
-  // useEffect(() => {
-  //     const getData = async () => {
-  //         try {
-  //             const response = await fetch(
-  //                 `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_7_days`
-  //             );
-  //             if (!response.ok) {
-  //                 throw new Error(
-  //                     `This is an HTTP error: The status is ${response.status}`
-  //                 );
-  //             }
-  //             let actualData = await response.json();
-  //             setData(actualData);
-  //             setError(null);
-  //         } catch (err) {
-  //             setError(err.message);
-  //             setData(null);
-  //         } finally {
-  //             setLoading(false);
-  //         }
-  //     }
-  //     getData()
-  // }, [])
-
-  // last_30_days
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(
-          `https://us-central1-opticks-test.cloudfunctions.net/stats?range=last_30_days`
+          `https://us-central1-opticks-test.cloudfunctions.net/stats?range=${range}`
         );
         if (!response.ok) {
           throw new Error(
@@ -102,24 +27,43 @@ function DashboardView() {
           );
         }
         let actualData = await response.json();
-        setData(actualData);
+        setThreatsData(actualData);
         setError(null);
       } catch (err) {
         setError(err.message);
-        setData(null);
+        setThreatsData(null);
       } finally {
         setLoading(false);
       }
     };
     getData();
-  }, []);
+  }, [range]);
+  // TODO: dependencies array
 
   return (
     <div className="dashboard">
-      <Range />
+      <Range range={range} setRange={setRange} />
       <div className="dashboard__widgets">
         <Widget title={"Invalid Traffic over time"} />
-        <Widget title={"Traffic Veracity"} />
+        <Widget title={"Traffic Veracity"}>
+          <p>{range}</p>
+          {loading && <div>A moment please...</div>}
+          {error && (
+            <div>{`There is a problem fetching the post data - ${error}`}</div>
+          )}
+          {threatsData &&
+            threatsData.map(({ day, risk, total }) => (
+              <div key={day}>
+                <p>
+                  <b>day:</b> {day}
+                </p>
+                <p>invalid: {risk.invalid}</p>
+                <p>suspicious: {risk.suspicious}</p>
+                <p>legitimate: {risk.legitimate}</p>
+                <h3>total: {total}</h3>
+              </div>
+            ))}
+        </Widget>
       </div>
       <CentralContent title={"Other Widgets"} />
       {/* {loading && <div>A moment please...</div>}
@@ -130,9 +74,9 @@ function DashboardView() {
                 data.map(({ day, risk, threats, total }) => (
                     <div key={day}>
                         <p><b>day:</b> {day}</p>
-                        <p>risk.invalid: {risk.invalid}</p>
-                        <p>risk.legitimate: {risk.legitimate}</p>
-                        <p>risk.suspicious: {risk.suspicious}</p>
+                        <p>invalid: {risk.invalid}</p>
+                        <p>suspicious: {risk.suspicious}</p>
+                        <p>legitimate: {risk.legitimate}</p>
                         <p>threats.BadBot: {threats.BadBot}</p>
                         <p>threats.DataTampering: {threats.DataTampering}</p>
                         <p>threats.NonCompliantTraffic: {threats.NonCompliantTraffic}</p>

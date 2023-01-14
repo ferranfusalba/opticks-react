@@ -12,9 +12,12 @@ import DashboardView from "./views/Dashboard/Dashboard"
 import FraudAnalysisView from "./views/FraudAnalysis/FraudAnalysis"
 
 function App() {
+  const height = window.innerHeight - 66;
+
   return (
     <div className="App">
       <TopNavbar />
+      {/* style={{ height: height }} */}
       <div className="layout-content">
         <Sidebar />
         <Routes>
