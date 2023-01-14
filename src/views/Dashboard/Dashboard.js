@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import "./Dashboard.scss"
 
 // Components
-import Savings from '../../components/Savings/Savings';
+import Widget from '../../components/Widget/Widget';
 import Range from '../../components/Range/Range';
 import Widgets from '../../components/Widgets/Widgets';
 import CentralContent from '../../components/CentralContent/CentralContent';
@@ -119,7 +119,7 @@ function DashboardView() {
         <div>
             <Range />
             <Widgets>
-                <Savings />
+                <Widget />
             </Widgets>
             <CentralContent title={'Other Widgets'}/>
             {/* {loading && <div>A moment please...</div>}

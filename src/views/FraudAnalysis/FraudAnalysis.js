@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import "./FraudAnalysis.scss";
 
-import Savings from "../../components/Savings/Savings";
+import Widget from "../../components/Widget/Widget";
 import Range from "../../components/Range/Range";
 import Widgets from "../../components/Widgets/Widgets";
 import CentralContent from "../../components/CentralContent/CentralContent";
@@ -41,7 +41,7 @@ function FraudAnalysisView() {
     <div>
       <Range />
       <Widgets>
-        <Savings title={"Savings"}>
+        <Widget title={"Savings"}>
           {loading && <div>A moment please...</div>}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
@@ -67,9 +67,9 @@ function FraudAnalysisView() {
               </section>
             </main>
           )}
-        </Savings>
-        <Savings title={"Traffic Veracity"}></Savings>
-        <Savings title={"Threat Distribution"}></Savings>
+        </Widget>
+        <Widget title={"Traffic Veracity"}></Widget>
+        <Widget title={"Threat Distribution"}></Widget>
       </Widgets>
       <CentralContent title={"The Table"} />
     </div>
