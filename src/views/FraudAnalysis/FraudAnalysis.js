@@ -11,7 +11,7 @@ import CentralContent from '../../components/CentralContent/CentralContent';
 
 function FraudAnalysisView() {
     return (
-        <div className="fraud-analysis">
+        <div>
             <Range />
             <Widgets>
                 <Savings />

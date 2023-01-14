@@ -118,7 +118,7 @@ function DashboardView() {
     }, [])
 
     return (
-        <div className="dashboard">
+        <div>
             <Range />
             <Widgets>
                 <Savings />
