@@ -1,4 +1,51 @@
 .savings {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: 0.125rem 0.125rem 0.5rem rgba(11, 18, 24, 0.1);
+  border-radius: 0.3125rem;
+  padding: 1rem 1.5rem;
+  h3 {
+    font: {
+      size: 1.125rem;
+    }
+  }
+  main {
+    // Shared styles on three data containers
+    span {
+      font: {
+        size: 0.875rem;
+        weight: 300;
+      }
+    }
+    // Specific styles by each container
+    section:nth-child(1) {
+      text-align: center;
+      &:not(span) {
+        font: {
+          size: 2.25rem;
+          weight: 700;
+        }
+      }
+    }
+    section:nth-child(2) {
+      display: flex;
+      flex-direction: row;
+      & > * {
+        width: 50%;
+        &:nth-child(1) {
+          text-align: center;
+        }
+      }
+      span {
+        color: #757575;
+      }
+      &:not(span) {
+        font: {
+          size: 1.5rem;
+          weight: 300;
+        }
+      }
+    }
+  }
 }
