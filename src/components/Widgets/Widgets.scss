@@ -1,5 +1,8 @@
 .widgets {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  & > * {
+    width: 33%;
+  }
 }
