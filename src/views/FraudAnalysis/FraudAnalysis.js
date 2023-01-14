@@ -70,7 +70,6 @@ function FraudAnalysisView() {
         <Widget title={"Traffic Veracity"}></Widget>
         <Widget title={"Threat Distribution"}></Widget>
       </div>
-      <Range />
       <CentralContent title={"The Table"} />
     </div>
   );
