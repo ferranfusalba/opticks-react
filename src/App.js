@@ -5,7 +5,6 @@ import { Route, Routes } from "react-router-dom"
 // Layout Components
 import TopNavbar from "./components/TopNavbar/TopNavbar"
 import Sidebar from "./components/Sidebar/Sidebar"
-// import ContentLayout from "./components/ContentLayout/ContentLayout"
 
 // View Components
 import HomeView from "./views/Home/Home"
@@ -24,14 +23,6 @@ function App() {
           <Route path="/fraud-analysis" element={<FraudAnalysisView />} />
         </Routes>
       </div>
-      {/* <ContentLayout>
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/dashboard" element={<DashboardView />} />
-          <Route path="/fraud-analysis" element={<FraudAnalysisView />} />
-        </Routes>
-      </ContentLayout> */}
     </div>
   );
 }
