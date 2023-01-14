@@ -1,29 +1,29 @@
 .element {
-    &>* {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        text-decoration: none;
-        color: white;
+  & > * {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    text-decoration: none;
+    color: white;
 
-        font: {
-            size: .875rem;
-        }
+    font: {
+      size: 0.875rem;
     }
+  }
 }
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: #07467d;
-    padding: .625rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #07467d;
+  padding: 0.625rem 1.25rem;
 }
 
 .sidebar--title {
-    color: #FFFFFF;
-    opacity: 0.6;
+  color: #ffffff;
+  opacity: 0.6;
 
-    font: {
-        size: .75rem;
-    }
+  font: {
+    size: 0.75rem;
+  }
 }
