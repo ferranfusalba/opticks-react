@@ -4,9 +4,16 @@
     flex-direction: row;
     width: 100%;
     & > *:nth-child(1) {
-      width: 15rem;
+      width: 15%;
+    }
+    & > *:nth-child(2) {
+      width: 85%;
     }
   }
+}
+
+h3 {
+  margin: 0;
 }
 
 .App-logo {
