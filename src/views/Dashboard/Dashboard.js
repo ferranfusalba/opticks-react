@@ -126,7 +126,7 @@ function DashboardView() {
                 <ThreatDistribution />
             </Widgets>
             <CentralContent title={'Other Widgets'}/>
-            {loading && <div>A moment please...</div>}
+            {/* {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
@@ -144,7 +144,7 @@ function DashboardView() {
                         <p>threats.TelemetryMissing: {threats.TelemetryMissing}</p>
                         <h3>total: {total}</h3>
                     </div>
-                ))}
+                ))} */}
         </div>
     );
 }

@@ -1,4 +1,7 @@
 // React
+
+import "./FraudAnalysis.scss"
+
 import Savings from '../../components/Savings/Savings';
 import TrafficVeracity from '../../components/TrafficVeracity/TrafficVeracity';
 import ThreatDistribution from '../../components/ThreatDistribution/ThreatDistribution';
