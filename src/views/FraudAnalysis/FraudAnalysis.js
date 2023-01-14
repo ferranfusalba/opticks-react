@@ -64,7 +64,6 @@ function FraudAnalysisView() {
     };
     getData();
   }, [range]);
-  // TODO: dependencies array
 
   return (
     <div className="fraud-analysis">

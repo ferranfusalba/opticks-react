@@ -1,15 +1,8 @@
 .dashboard {
-  // Range
   // Widgets
   &__widgets {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     gap: 1rem;
-    & > *:nth-child(1) {
-        width: 66%;
-    }
-    & > *:nth-child(2) {
-        width: 33%;
-    }
   }
 }

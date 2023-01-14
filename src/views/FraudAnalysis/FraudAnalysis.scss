@@ -1,14 +1,9 @@
 .fraud-analysis {
-  // Range
   // Widgets
   &__widgets {
-    // TODO: Grid
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-    & > * {
-      width: 33%;
-    }
     // Savings Widget
     & > *:nth-child(1) {
       main {

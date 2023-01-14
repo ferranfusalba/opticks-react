@@ -38,7 +38,6 @@ function DashboardView() {
     };
     getData();
   }, [range]);
-  // TODO: dependencies array
 
   return (
     <div className="dashboard">
@@ -66,25 +65,6 @@ function DashboardView() {
         </Widget>
       </div>
       <CentralContent title={"Other Widgets"} />
-      {/* {loading && <div>A moment please...</div>}
-            {error && (
-                <div>{`There is a problem fetching the post data - ${error}`}</div>
-            )}
-            {data &&
-                data.map(({ day, risk, threats, total }) => (
-                    <div key={day}>
-                        <p><b>day:</b> {day}</p>
-                        <p>invalid: {risk.invalid}</p>
-                        <p>suspicious: {risk.suspicious}</p>
-                        <p>legitimate: {risk.legitimate}</p>
-                        <p>threats.BadBot: {threats.BadBot}</p>
-                        <p>threats.DataTampering: {threats.DataTampering}</p>
-                        <p>threats.NonCompliantTraffic: {threats.NonCompliantTraffic}</p>
-                        <p>threats.StatisticalOutliers: {threats.StatisticalOutliers}</p>
-                        <p>threats.TelemetryMissing: {threats.TelemetryMissing}</p>
-                        <h3>total: {total}</h3>
-                    </div>
-                ))} */}
     </div>
   );
 }
