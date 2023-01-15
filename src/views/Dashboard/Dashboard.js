@@ -8,6 +8,8 @@ import Widget from "../../components/Widget/Widget";
 import Range from "../../components/Range/Range";
 import CentralContent from "../../components/CentralContent/CentralContent";
 
+import info_circle from "../../assets/icons/info_circle.svg";
+
 import {
   Chart as ChartJS,
   ArcElement,
@@ -22,7 +24,6 @@ import {
 import { Doughnut } from "react-chartjs-2";
 
 import { Line } from "react-chartjs-2";
-import faker from "faker";
 
 ChartJS.register(
   ArcElement,
@@ -45,6 +46,9 @@ function DashboardView() {
   const [sumSuspiciousRisk, setSumSuspiciousRisk] = useState(null);
   const [sumLegitimateRisk, setSumLegitimateRisk] = useState(null);
   const [sumTotalRisk, setSumTotalRisk] = useState(null);
+
+  const [rangeLessVisible, setRangeLessVisible] = useState(false);
+  const [rangeMoreVisible, setRangeMoreVisible] = useState(false);
 
   // Stats
   useEffect(() => {
@@ -93,10 +97,27 @@ function DashboardView() {
     getData();
   }, [range]);
 
+  useEffect(() => {
+    range === "today" || range === "yesterday"
+      ? setRangeLessVisible(true)
+      : setRangeLessVisible(false);
+    range === "last_7_days" || range === "last_30_days"
+      ? setRangeMoreVisible(true)
+      : setRangeMoreVisible(false);
+  }, [range]);
+
   console.log(threatsData);
   console.log(sumTotalRisk);
 
-  const data = {
+  const optionsPie = {
+    plugins: {
+      legend: {
+        position: "right",
+      },
+    },
+  };
+
+  const dataPie = {
     labels: ["Invalid", "Suspicious", "Legitimate"],
     datasets: [
       {
@@ -112,37 +133,19 @@ function DashboardView() {
       legend: {
         position: "bottom",
       },
-      // title: {
-      //   display: true,
-      //   text: "Chart.js Line Chart",
-      // },
     },
   };
 
-  const labelsLine = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-
   const dataLine = {
-    // labelsLine,
     labels: ["11/02", "12/02", "13/02", "14/02", "15/02", "16/02"],
     datasets: [
       {
         label: "Invalid visits",
-        // data: labelsLine.map(() =>
-        //   faker.datatype.number({ min: 0, max: 3000 })
-        // ),
         fill: false,
         data: [33, 53, 85, 41, 44, 65, 19],
         borderColor: "#F05641",
         backgroundColor: "#F05641",
-        tension: 0.5
+        tension: 0.5,
       },
     ],
   };
@@ -152,13 +155,26 @@ function DashboardView() {
       <Range range={range} setRange={setRange} />
       <div className="dashboard__widgets">
         <Widget title={"Invalid Traffic over time"}>
-          <Line options={optionsLine} data={dataLine} />
+          {rangeLessVisible && (
+            <div class="rangeLessVisible">
+              <section>
+                <aside>
+                <img src={info_circle} alt={"Info circle icon"}/> 
+                </aside>
+                <article>
+                  <b>Select a wider range</b>
+                  <br />A minimum of 2 days of data is needed in order to
+                  display these metrics.
+                </article>
+              </section>
+            </div>
+          )}
+          {rangeMoreVisible && <Line options={optionsLine} data={dataLine} />}
         </Widget>
         <Widget title={"Traffic Veracity"}>
-          <p>{range}</p>
           <div className="dashboard__widgets--traffic-veracity">
             <aside>
-              <Doughnut data={data} />
+              <Doughnut options={optionsPie} data={dataPie} />
             </aside>
             <aside>
               <p>test</p>

@@ -4,6 +4,25 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
+    .rangeLessVisible {
+      display: flex;
+      justify-content: center;
+      section {
+        display: flex;
+        gap: .5rem;
+        width: 350px;
+        background: #dee9fd;
+        border: 1px solid #0062b8;
+        border-radius: 8px;
+        color: #0062b8;
+        padding: .5rem 1rem;
+        aside {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
     &--traffic-veracity {
       display: grid;
       grid-template-columns: 1fr 2fr;
