@@ -8,6 +8,26 @@ import Range from "../../components/Range/Range";
 import CentralContent from "../../components/CentralContent/CentralContent";
 import BarGraph from "../../components/BarGraph/BarGraph";
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 function FraudAnalysisView() {
   const [savingsData, setSavingsData] = useState(null);
   const [threatsData, setThreatsData] = useState(null);
@@ -65,6 +85,36 @@ function FraudAnalysisView() {
     getData();
   }, [range]);
 
+  const options = {
+    indexAxis: 'y',
+    elements: {
+      bar: {
+        borderWidth: 2,
+      },
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+  };
+    
+  const data = {
+    labels: ['Bad Bots', 'Data Tampering', 'Non-compliant Traffic', 'Statistical anomalies', 'Telemetry missing'],
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [33, 53, 85, 41, 44, 65],
+        borderColor: '#5F8BB1',
+        backgroundColor: '#5F8BB1',
+      },
+    ],
+  };
+
   return (
     <div className="fraud-analysis">
       <Range range={range} setRange={setRange} />
@@ -117,7 +167,7 @@ function FraudAnalysisView() {
         </Widget>
         <Widget title={"Threat Distribution"}>
           {/* <BarGraph /> */}
-          <p>{range}</p>
+          <Bar options={options} data={data} />
           {loading && <div>A moment please...</div>}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
