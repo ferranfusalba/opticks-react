@@ -16,7 +16,7 @@ function RangeWrapper({range, setRange}) {
   ];
 
   return (
-    <>
+    <div className="range-wrapper">
       {/* <img src={calendar_selected} alt={"Calendar Selected Icon"} /> */}
       <select value={range} onChange={handleOnChange}>
         {options.map(({ value, label }, index) => (
@@ -25,7 +25,7 @@ function RangeWrapper({range, setRange}) {
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 }
 
