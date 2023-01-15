@@ -8,10 +8,32 @@ import Widget from "../../components/Widget/Widget";
 import Range from "../../components/Range/Range";
 import CentralContent from "../../components/CentralContent/CentralContent";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+} from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Line } from "react-chartjs-2";
+import faker from "faker";
+
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title
+);
 
 function DashboardView() {
   const [threatsData, setThreatsData] = useState(null);
@@ -84,11 +106,54 @@ function DashboardView() {
     ],
   };
 
+  const optionsLine = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      // title: {
+      //   display: true,
+      //   text: "Chart.js Line Chart",
+      // },
+    },
+  };
+
+  const labelsLine = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+  ];
+
+  const dataLine = {
+    // labelsLine,
+    labels: ["11/02", "12/02", "13/02", "14/02", "15/02", "16/02"],
+    datasets: [
+      {
+        label: "Invalid visits",
+        // data: labelsLine.map(() =>
+        //   faker.datatype.number({ min: 0, max: 3000 })
+        // ),
+        fill: false,
+        data: [33, 53, 85, 41, 44, 65, 19],
+        borderColor: "#F05641",
+        backgroundColor: "#F05641",
+        tension: 0.5
+      },
+    ],
+  };
+
   return (
     <div className="dashboard">
       <Range range={range} setRange={setRange} />
       <div className="dashboard__widgets">
-        <Widget title={"Invalid Traffic over time"} />
+        <Widget title={"Invalid Traffic over time"}>
+          <Line options={optionsLine} data={dataLine} />
+        </Widget>
         <Widget title={"Traffic Veracity"}>
           <p>{range}</p>
           <div className="dashboard__widgets--traffic-veracity">
