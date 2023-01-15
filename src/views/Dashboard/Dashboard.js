@@ -42,10 +42,11 @@ function DashboardView() {
   const [error, setError] = useState(null);
   const [range, setRange] = useState("today");
 
-  const [sumInvalidRisk, setSumInvalidRisk] = useState(null);
-  const [sumSuspiciousRisk, setSumSuspiciousRisk] = useState(null);
-  const [sumLegitimateRisk, setSumLegitimateRisk] = useState(null);
-  const [sumTotalRisk, setSumTotalRisk] = useState(null);
+  const [sumInvalid, setSumInvalid] = useState(null);
+  const [sumSuspicious, setSumSuspicious] = useState(null);
+  const [sumLegitimate, setSumLegitimate] = useState(null);
+
+  const [weeklyDates, setWeeklyDates] = useState(null);
 
   const [rangeLessVisible, setRangeLessVisible] = useState(false);
   const [rangeMoreVisible, setRangeMoreVisible] = useState(false);
@@ -63,29 +64,52 @@ function DashboardView() {
           );
         }
         let actualData = await response.json();
-        // if (range === 'last_7_days' || range === 'last_30_days') {
-        //   console.log(actualData);
 
-        //   actualData.forEach(element => {
-        //     console.log(element.risk.invalid);
-        //     setSumRisk(element.risk.invalid);
-        //   });
+        console.log(actualData);
 
-        //   // actualData.map(({ risk }) => (
-        //   //   console.log(risk.invalid),
-        //   //   console.log(risk.suspicious),
-        //   //   console.log(risk.legitimate)
-        //   // ));
+        // Risk - Invalid
+        const invalidArray = actualData.map(({ risk }) => risk.invalid);
+        console.log("invalidArray", invalidArray);
+        const totalInvalid = invalidArray.reduce((acc, day) => acc + day, 0);
+        console.log("totalInvalid", totalInvalid);
+        setSumInvalid(totalInvalid);
+        console.log("sumInvalid: ", sumInvalid);
 
-        //   setThreatsData(actualData);
-        // } else {
-        //   setThreatsData(actualData);
-        // }
+        // Risk - Suspicious
+        const suspiciousArray = actualData.map(({ risk }) => risk.suspicious);
+        console.log("suspiciousArray", suspiciousArray);
+        const totalSuspicious = suspiciousArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
+        console.log("totalSuspicious", totalSuspicious);
+        setSumSuspicious(totalSuspicious);
+        console.log("sumSuspicious: ", sumSuspicious);
+
+        // Risk - Legitimate
+        const legitimateArray = actualData.map(({ risk }) => risk.legitimate);
+        console.log("legitimateArray", legitimateArray);
+        const totalLegitimate = legitimateArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
+        console.log("totalLegitimate", totalLegitimate);
+        setSumLegitimate(totalLegitimate);
+        console.log("sumLegitimate: ", sumLegitimate);
+
+        // Dates
+        const weeklyDays = actualData.map(({day}) => day);
+        setWeeklyDates(weeklyDays);
+        console.log(weeklyDates);
+
+
+
+
+
+
+
+
         setThreatsData(actualData);
-        setSumInvalidRisk(actualData[0].risk.invalid);
-        setSumSuspiciousRisk(actualData[0].risk.suspicious);
-        setSumLegitimateRisk(actualData[0].risk.legitimate);
-        setSumTotalRisk(sumInvalidRisk + sumSuspiciousRisk + sumLegitimateRisk);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -106,9 +130,6 @@ function DashboardView() {
       : setRangeMoreVisible(false);
   }, [range]);
 
-  console.log(threatsData);
-  console.log(sumTotalRisk);
-
   const optionsPie = {
     plugins: {
       legend: {
@@ -121,7 +142,7 @@ function DashboardView() {
     labels: ["Invalid", "Suspicious", "Legitimate"],
     datasets: [
       {
-        data: [sumInvalidRisk, sumSuspiciousRisk, sumLegitimateRisk],
+        data: [sumInvalid, sumSuspicious, sumLegitimate],
         backgroundColor: ["#F05641", "#FEB031", "#25D184"],
       },
     ],
@@ -137,7 +158,8 @@ function DashboardView() {
   };
 
   const dataLine = {
-    labels: ["11/02", "12/02", "13/02", "14/02", "15/02", "16/02"],
+    // labels: ["11/02", "12/02", "13/02", "14/02", "15/02", "16/02"],
+    labels: weeklyDates,
     datasets: [
       {
         label: "Invalid visits",
@@ -156,10 +178,10 @@ function DashboardView() {
       <div className="dashboard__widgets">
         <Widget title={"Invalid Traffic over time"}>
           {rangeLessVisible && (
-            <div class="rangeLessVisible">
+            <div className="rangeLessVisible">
               <section>
                 <aside>
-                <img src={info_circle} alt={"Info circle icon"}/> 
+                  <img src={info_circle} alt={"Info circle icon"} />
                 </aside>
                 <article>
                   <b>Select a wider range</b>
@@ -169,12 +191,22 @@ function DashboardView() {
               </section>
             </div>
           )}
-          {rangeMoreVisible && <Line options={optionsLine} data={dataLine} />}
+          {loading && <div>A moment please...</div>}
+          {error && (
+            <div>{`There is a problem fetching the post data - ${error}`}</div>
+          )}
+          {threatsData && rangeMoreVisible && (
+            <Line options={optionsLine} data={dataLine} />
+          )}
         </Widget>
         <Widget title={"Traffic Veracity"}>
           <div className="dashboard__widgets--traffic-veracity">
             <aside>
-              <Doughnut options={optionsPie} data={dataPie} />
+              {loading && <div>A moment please...</div>}
+              {error && (
+                <div>{`There is a problem fetching the post data - ${error}`}</div>
+              )}
+              {threatsData && <Doughnut options={optionsPie} data={dataPie} />}
             </aside>
             <aside>
               <p>test</p>
