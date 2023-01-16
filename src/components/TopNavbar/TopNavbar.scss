@@ -1,14 +1,14 @@
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 0.875rem 1rem;
-  box-shadow: 0rem 0.125rem 0.1875rem rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-m) var(--spacing-l);
+  box-shadow: 0rem var(--spacing-5xs) 0.1875rem rgba(0, 0, 0, 0.1);
   img {
     max-width: 7rem;
   }
   p {
     font: {
-      size: 0.75rem;
+      size: var(--font-size-s);
     }
   }
 }

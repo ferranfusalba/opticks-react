@@ -1,3 +1,44 @@
+:root {
+  // Color variables
+  --green: #25D184;
+  --orange: #FEB031;
+  --red: #F05641;
+  --blue: #00447F;
+  --bluesecondary: #5F8BB1;
+  --bluetertiary: #0062b8;
+  --white: #FFFFFF;
+  --whitesecondary: #f8f8f8;
+  --whitetertiary: #dee9fd;
+  --black: #000000;
+  --greyprimary: #8e8e8e;
+  --greysecondary: #757575;
+  // Font size variables
+  --font-size-xs: .625rem;
+  --font-size-s: .75rem;
+  --font-size-m: .875rem;
+  --font-size-l: 1rem;
+  --font-size-xl: 1.125rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2rem;
+  --font-size-5xl: 2.25rem;
+  // Spacing variables
+  --spacing-5xs: .125rem;
+  --spacing-4xs: .25rem;
+  --spacing-3xs: .375rem;
+  --spacing-2xs: .5rem;
+  --spacing-xs: .625rem;
+  --spacing-s: .75rem;
+  --spacing-m: .875rem;
+  --spacing-l: 1rem;
+  --spacing-xl: 1.125rem;
+  --spacing-2xl: 1.5rem;
+  --spacing-3xl: 1.75rem;
+  --spacing-4xl: 2rem;
+  --spacing-5xl: 2.25rem;
+  --header-desktop: 4.125rem;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',

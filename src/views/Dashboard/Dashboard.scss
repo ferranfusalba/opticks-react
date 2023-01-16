@@ -3,7 +3,7 @@
   &__widgets {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 1rem;
+    gap: var(--spacing-l);
     &--invalid-traffic--range-less {
       display: flex;
       justify-content: center;
@@ -11,13 +11,13 @@
       height: 100%;
       section {
         display: flex;
-        gap: 0.5rem;
+        gap: var(--spacing-2xs);
         width: 21.875rem;
-        background: #dee9fd;
-        border: 0.0625rem solid #0062b8;
-        border-radius: 0.5rem;
-        color: #0062b8;
-        padding: 0.5rem 1rem;
+        background: var(--whitetertiary);
+        border: 0.0625rem solid var(--bluetertiary);
+        border-radius: var(--spacing-2xs);
+        color: var(--bluetertiary);
+        padding: var(--spacing-2xs) var(--spacing-l);
         aside {
           display: flex;
           justify-content: center;
@@ -29,14 +29,14 @@
       display: flex;
       flex-direction: row;
       width: 100%;
-      gap: 12px;
+      gap: var(--spacing-s);
       & > * {
         width: 50%;
       }
       & > *:nth-child(2) {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: var(--spacing-s);
         align-items: flex-start;
         justify-content: center;
       }

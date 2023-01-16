@@ -3,17 +3,17 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: calc(100vh - 4.125rem);
+    height: calc(100vh - var(--header-desktop));
     & > *:nth-child(1) {
       width: 15%;
     }
     & > *:nth-child(2) {
       width: 85%;
       display: grid;
-      gap: 16px;
+      gap: var(--spacing-l);
       grid-template-rows: 1fr 6fr 12fr;
-      padding: 1rem 1.5rem;
-      background-color: #f8f8f8;
+      padding: var(--spacing-l) var(--spacing-2xl);
+      background-color: var(--whitesecondary);
     }
   }
 }

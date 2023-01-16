@@ -1,14 +1,14 @@
 .widget {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: var(--spacing-s);
   background: #ffffff;
-  box-shadow: 0.125rem 0.125rem 0.5rem rgba(11, 18, 24, 0.1);
+  box-shadow: var(--spacing-5xs) var(--spacing-5xs) var(--spacing-2xs) rgba(11, 18, 24, 0.1);
   border-radius: 0.3125rem;
-  padding: 1rem 1.5rem;
+  padding: var(--spacing-l) var(--spacing-2xl);
   h3 {
     font: {
-      size: 1.125rem;
+      size: var(--font-size-xl)
     }
   }
 }

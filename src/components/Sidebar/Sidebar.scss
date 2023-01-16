@@ -2,12 +2,12 @@
   & > * {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: var(--spacing-l);
     text-decoration: none;
-    color: white;
+    color: var(--white);
 
     font: {
-      size: 0.875rem;
+      size: var(--font-size-m);
     }
   }
 }
@@ -15,15 +15,15 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #07467d;
-  padding: 0.625rem 1.25rem;
+  background-color: var(--blue);
+  padding: var(--spacing-xs) 1.25rem;
 }
 
 .sidebar--title {
-  color: #ffffff;
+  color: var(--white);
   opacity: 0.6;
 
   font: {
-    size: 0.75rem;
+    size: var(--font-size-s);
   }
 }

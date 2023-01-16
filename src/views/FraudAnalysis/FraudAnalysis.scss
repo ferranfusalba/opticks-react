@@ -3,14 +3,14 @@
   &__widgets {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
+    gap: var(--spacing-l);
     // Savings Widget
     & > *:nth-child(1) {
       main {
         // Shared styles on three data containers
         span {
           font: {
-            size: 0.875rem;
+            size: var(--font-size-m);
             weight: 300;
           }
         }
@@ -19,7 +19,7 @@
           text-align: center;
           &:not(span) {
             font: {
-              size: 2.25rem;
+              size: var(--font-size-5xl);
               weight: 700;
             }
           }
@@ -34,11 +34,11 @@
             }
           }
           span {
-            color: #757575;
+            color: var(--greysecondary);
           }
           &:not(span) {
             font: {
-              size: 1.5rem;
+              size: var(--font-size-2xl);
               weight: 300;
             }
           }
@@ -49,14 +49,14 @@
       display: flex;
       flex-direction: row;
       width: 100%;
-      gap: 12px;
+      gap: var(--spacing-s);
       & > * {
         width: 50%;
       }
       & > *:nth-child(2) {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: var(--spacing-s);
         align-items: flex-start;
         justify-content: center;
       }
