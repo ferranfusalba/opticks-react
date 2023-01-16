@@ -157,6 +157,7 @@ function DashboardView() {
         data: invalidDays,
         borderColor: "#F05641",
         backgroundColor: "#F05641",
+        pointStyle: false,
         tension: 0.5,
       },
     ],
