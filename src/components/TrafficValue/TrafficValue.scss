@@ -1,6 +1,7 @@
 .traffic-value {
   display: flex;
   flex-direction: row;
+  gap: 4px;
   &__ellipse {
     height: 1rem;
     width: 1rem;
@@ -14,11 +15,6 @@
     }
     &--green {
       background-color: #25D184;
-    }
-  }
-  b {
-    font: {
-      weight: 500;
     }
   }
   p {

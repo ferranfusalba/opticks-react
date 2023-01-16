@@ -181,7 +181,6 @@ function DashboardView() {
               </section>
             </div>
           )}
-          {/* {loading && <div>A moment please...</div>} */}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
           )}
