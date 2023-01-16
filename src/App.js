@@ -1,15 +1,14 @@
 // React
-import './App.scss';
-import { Route, Routes } from "react-router-dom"
+import "./App.scss";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 // Layout Components
-import TopNavbar from "./components/TopNavbar/TopNavbar"
-import Sidebar from "./components/Sidebar/Sidebar"
+import TopNavbar from "./components/TopNavbar/TopNavbar";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 // View Components
-import HomeView from "./views/Home/Home"
-import DashboardView from "./views/Dashboard/Dashboard"
-import FraudAnalysisView from "./views/FraudAnalysis/FraudAnalysis"
+import DashboardView from "./views/Dashboard/Dashboard";
+import FraudAnalysisView from "./views/FraudAnalysis/FraudAnalysis";
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
       <div className="layout-content">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<HomeView />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/fraud-analysis" element={<FraudAnalysisView />} />
         </Routes>
