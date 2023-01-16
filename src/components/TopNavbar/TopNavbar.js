@@ -2,7 +2,7 @@
 import './TopNavbar.scss';
 
 // Assets
-import logo from "../../assets/images/logo_opticks.svg"
+import logo from "../../assets/images/logo_opticks.svg";
 
 function TopNavbarComponent() {
     return (

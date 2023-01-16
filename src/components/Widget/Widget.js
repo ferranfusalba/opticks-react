@@ -1,4 +1,4 @@
-// React
+// Styles
 import "./Widget.scss";
 
 function WidgetComponent({title, children}) {

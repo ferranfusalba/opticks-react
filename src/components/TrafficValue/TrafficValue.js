@@ -1,3 +1,4 @@
+// Styles
 import "./TrafficValue.scss";
 
 function TrafficValue({ color, number, type }) {

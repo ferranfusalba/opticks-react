@@ -1,3 +1,4 @@
+// Styles
 import "./CentralContent.scss"
 
 function CentralContent({title}) {
