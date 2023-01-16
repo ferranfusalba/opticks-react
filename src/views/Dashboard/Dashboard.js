@@ -1,15 +1,18 @@
 // React
 import React, { useEffect, useState } from "react";
 
+// Styles
 import "./Dashboard.scss";
 
 // Components
-import Widget from "../../components/Widget/Widget";
-import Range from "../../components/Range/Range";
 import CentralContent from "../../components/CentralContent/CentralContent";
+import Range from "../../components/Range/Range";
+import Widget from "../../components/Widget/Widget";
 
+// Assets
 import info_circle from "../../assets/icons/info_circle.svg";
 
+// Charts
 import {
   Chart as ChartJS,
   ArcElement,
@@ -22,7 +25,6 @@ import {
   Title,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -37,19 +39,21 @@ ChartJS.register(
 );
 
 function DashboardView() {
-  const [threatsData, setThreatsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [threatsData, setThreatsData] = useState(null);
   const [range, setRange] = useState("today");
 
+  // Section: Traffic veracity
   const [sumInvalid, setSumInvalid] = useState(null);
   const [sumSuspicious, setSumSuspicious] = useState(null);
   const [sumLegitimate, setSumLegitimate] = useState(null);
 
-  const [weeklyDates, setWeeklyDates] = useState(null);
-
+  // Section: Invalid traffic
   const [rangeLessVisible, setRangeLessVisible] = useState(false);
   const [rangeMoreVisible, setRangeMoreVisible] = useState(false);
+  const [weeklyDates, setWeeklyDates] = useState(null);
+  const [invalidDays, setInvalidDays] = useState(null);
 
   // Stats
   useEffect(() => {
@@ -65,50 +69,33 @@ function DashboardView() {
         }
         let actualData = await response.json();
 
-        console.log(actualData);
-
         // Risk - Invalid
         const invalidArray = actualData.map(({ risk }) => risk.invalid);
-        console.log("invalidArray", invalidArray);
+        setInvalidDays(invalidArray);
         const totalInvalid = invalidArray.reduce((acc, day) => acc + day, 0);
-        console.log("totalInvalid", totalInvalid);
         setSumInvalid(totalInvalid);
-        console.log("sumInvalid: ", sumInvalid);
 
         // Risk - Suspicious
         const suspiciousArray = actualData.map(({ risk }) => risk.suspicious);
-        console.log("suspiciousArray", suspiciousArray);
         const totalSuspicious = suspiciousArray.reduce(
           (acc, day) => acc + day,
           0
         );
-        console.log("totalSuspicious", totalSuspicious);
         setSumSuspicious(totalSuspicious);
-        console.log("sumSuspicious: ", sumSuspicious);
 
         // Risk - Legitimate
         const legitimateArray = actualData.map(({ risk }) => risk.legitimate);
-        console.log("legitimateArray", legitimateArray);
         const totalLegitimate = legitimateArray.reduce(
           (acc, day) => acc + day,
           0
         );
-        console.log("totalLegitimate", totalLegitimate);
         setSumLegitimate(totalLegitimate);
-        console.log("sumLegitimate: ", sumLegitimate);
 
         // Dates
-        const weeklyDays = actualData.map(({day}) => day);
+        const weeklyDays = actualData.map(({ day }) => day);
         setWeeklyDates(weeklyDays);
-        console.log(weeklyDates);
 
-
-
-
-
-
-
-
+        // All data
         setThreatsData(actualData);
         setError(null);
       } catch (err) {
@@ -121,6 +108,7 @@ function DashboardView() {
     getData();
   }, [range]);
 
+  // Conditional Rendering
   useEffect(() => {
     range === "today" || range === "yesterday"
       ? setRangeLessVisible(true)
@@ -130,6 +118,7 @@ function DashboardView() {
       : setRangeMoreVisible(false);
   }, [range]);
 
+  // Pie chart
   const optionsPie = {
     plugins: {
       legend: {
@@ -139,15 +128,17 @@ function DashboardView() {
   };
 
   const dataPie = {
-    labels: ["Invalid", "Suspicious", "Legitimate"],
+    labels: ["Suspicious", "Invalid", "Legitimate"],
     datasets: [
       {
-        data: [sumInvalid, sumSuspicious, sumLegitimate],
+        data: [sumSuspicious, sumInvalid, sumLegitimate],
+        borderWidth: 2,
         backgroundColor: ["#F05641", "#FEB031", "#25D184"],
       },
     ],
   };
 
+  // Line chart
   const optionsLine = {
     responsive: true,
     plugins: {
@@ -158,13 +149,12 @@ function DashboardView() {
   };
 
   const dataLine = {
-    // labels: ["11/02", "12/02", "13/02", "14/02", "15/02", "16/02"],
     labels: weeklyDates,
     datasets: [
       {
         label: "Invalid visits",
         fill: false,
-        data: [33, 53, 85, 41, 44, 65, 19],
+        data: invalidDays,
         borderColor: "#F05641",
         backgroundColor: "#F05641",
         tension: 0.5,
