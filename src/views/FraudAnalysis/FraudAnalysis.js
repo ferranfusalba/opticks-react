@@ -179,7 +179,7 @@ function FraudAnalysisView() {
   const optionsPie = {
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
     },
   };

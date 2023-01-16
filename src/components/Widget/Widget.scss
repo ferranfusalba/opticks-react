@@ -11,4 +11,10 @@
       size: var(--font-size-xl)
     }
   }
+  &--content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
