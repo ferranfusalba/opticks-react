@@ -4,16 +4,16 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-    .rangeLessVisible {
+    &--invalid-traffic--range-less {
       display: flex;
       justify-content: center;
       section {
         display: flex;
         gap: .5rem;
-        width: 350px;
+        width: 21.875rem;
         background: #dee9fd;
-        border: 1px solid #0062b8;
-        border-radius: 8px;
+        border: .0625rem solid #0062b8;
+        border-radius: .5rem;
         color: #0062b8;
         padding: .5rem 1rem;
         aside {

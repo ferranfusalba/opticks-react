@@ -168,7 +168,7 @@ function DashboardView() {
       <div className="dashboard__widgets">
         <Widget title={"Invalid Traffic over time"}>
           {rangeLessVisible && (
-            <div className="rangeLessVisible">
+            <div className="dashboard__widgets--invalid-traffic--range-less">
               <section>
                 <aside>
                   <img src={info_circle} alt={"Info circle icon"} />
