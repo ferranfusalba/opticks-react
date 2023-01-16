@@ -191,7 +191,7 @@ function DashboardView() {
         <Widget title={"Traffic Veracity"}>
           <div className="dashboard__widgets--traffic-veracity">
             <aside>
-              {loading && <div>A moment please...</div>}
+              {loading && <div>Loading...</div>}
               {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
               )}

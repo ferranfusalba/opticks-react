@@ -241,7 +241,7 @@ function FraudAnalysisView() {
       <Range range={range} setRange={setRange} />
       <div className="fraud-analysis__widgets">
         <Widget title={"Savings"}>
-          {loading && <div>A moment please...</div>}
+          {loading && <div>Loading...</div>}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
           )}
@@ -270,7 +270,7 @@ function FraudAnalysisView() {
         <Widget title={"Traffic Veracity"}>
           <div className="fraud-analysis__widgets--traffic-veracity">
             <aside>
-              {loading && <div>A moment please...</div>}
+              {loading && <div>Loading...</div>}
               {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
               )}
@@ -296,7 +296,7 @@ function FraudAnalysisView() {
           </div>
         </Widget>
         <Widget title={"Threat Distribution"}>
-          {loading && <div>A moment please...</div>}
+          {loading && <div>Loading...</div>}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
           )}
