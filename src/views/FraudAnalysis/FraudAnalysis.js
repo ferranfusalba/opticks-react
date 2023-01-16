@@ -1,39 +1,60 @@
 // React
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
+// Styles
 import "./FraudAnalysis.scss";
 
-import Widget from "../../components/Widget/Widget";
-import Range from "../../components/Range/Range";
+// Components
 import CentralContent from "../../components/CentralContent/CentralContent";
-import BarGraph from "../../components/BarGraph/BarGraph";
+import Range from "../../components/Range/Range";
+import Widget from "../../components/Widget/Widget";
 
+// Charts
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
+  ArcElement,
   BarElement,
+  CategoryScale,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
+  ArcElement,
   BarElement,
+  CategoryScale,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
   Title,
-  Tooltip,
-  Legend
+  Tooltip
 );
 
 function FraudAnalysisView() {
-  const [savingsData, setSavingsData] = useState(null);
-  const [threatsData, setThreatsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [savingsData, setSavingsData] = useState(null);
+  const [threatsData, setThreatsData] = useState(null);
   const [range, setRange] = useState("today");
+
+  // Section: Traffic veracity
+  const [sumInvalid, setSumInvalid] = useState(null);
+  const [sumSuspicious, setSumSuspicious] = useState(null);
+  const [sumLegitimate, setSumLegitimate] = useState(null);
+
+  // Section: Threat distribution
+  const [sumBadBots, setSumBadBots] = useState(null);
+  const [sumDataTampering, setSumDataTampering] = useState(null);
+  const [sumNonCompliantTraffic, setSumNonCompliantTraffic] = useState(null);
+  const [sumStatisticalAnomalies, setSumStatisticalAnomalies] = useState(null);
+  const [sumTelemetryMissing, setSumTelemetryMissing] = useState(null);
 
   // Savings
   useEffect(() => {
@@ -73,6 +94,55 @@ function FraudAnalysisView() {
           );
         }
         let actualData = await response.json();
+        console.log("actualData", actualData);
+
+        // Risk - Invalid
+        const invalidArray = actualData.map(({ risk }) => risk.invalid);
+        const totalInvalid = invalidArray.reduce((acc, day) => acc + day, 0);
+        setSumInvalid(totalInvalid);
+
+        // Risk - Suspicious
+        const suspiciousArray = actualData.map(({ risk }) => risk.suspicious);
+        const totalSuspicious = suspiciousArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
+        setSumSuspicious(totalSuspicious);
+
+        // Risk - Legitimate
+        const legitimateArray = actualData.map(({ risk }) => risk.legitimate);
+        const totalLegitimate = legitimateArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
+        setSumLegitimate(totalLegitimate);
+
+        // Threats - Bad Bots
+        const badBotsArray = actualData.map(({ threats }) => threats.BadBot);
+        const totalBadBots = badBotsArray.reduce((acc, day) => acc + day, 0);
+        setSumBadBots(totalBadBots);
+
+        // Threats - Data Tampering
+        const dataTamperingArray = actualData.map(({ threats }) => threats.DataTampering);
+        const totalDataTampering = dataTamperingArray.reduce((acc, day) => acc + day, 0);
+        setSumDataTampering(totalDataTampering);
+
+        // Threats - Non-compliant Traffic
+        const nonCompliantTrafficArray = actualData.map(({ threats }) => threats.NonCompliantTraffic);
+        const totalNonCompliantTraffic = nonCompliantTrafficArray.reduce((acc, day) => acc + day, 0);
+        setSumNonCompliantTraffic(totalNonCompliantTraffic);
+
+        // Threats - Statistical anomalies
+        const statisticalAnomaliesArray = actualData.map(({ threats }) => threats.StatisticalOutliers);
+        const totalStatisticalAnomalies = statisticalAnomaliesArray.reduce((acc, day) => acc + day, 0);
+        setSumStatisticalAnomalies(totalStatisticalAnomalies);
+
+        // Threats - Telemetry missing
+        const telemetryMissingArray = actualData.map(({ threats }) => threats.TelemetryMissing);
+        const totalTelemetryMissing = telemetryMissingArray.reduce((acc, day) => acc + day, 0);
+        setSumTelemetryMissing(totalTelemetryMissing);
+
+        // All data
         setThreatsData(actualData);
         setError(null);
       } catch (err) {
@@ -85,8 +155,29 @@ function FraudAnalysisView() {
     getData();
   }, [range]);
 
-  const options = {
-    indexAxis: 'y',
+  // Pie chart
+  const optionsPie = {
+    plugins: {
+      legend: {
+        position: "right",
+      },
+    },
+  };
+
+  const dataPie = {
+    labels: ["Suspicious", "Invalid", "Legitimate"],
+    datasets: [
+      {
+        data: [sumSuspicious, sumInvalid, sumLegitimate],
+        borderWidth: 2,
+        backgroundColor: ["#F05641", "#FEB031", "#25D184"],
+      },
+    ],
+  };
+
+  // Bar chart
+  const optionsBar = {
+    indexAxis: "y",
     elements: {
       bar: {
         borderWidth: 2,
@@ -102,15 +193,26 @@ function FraudAnalysisView() {
       },
     },
   };
-    
-  const data = {
-    labels: ['Bad Bots', 'Data Tampering', 'Non-compliant Traffic', 'Statistical anomalies', 'Telemetry missing'],
+
+  const dataBar = {
+    labels: [
+      "Bad Bots",
+      "Data Tampering",
+      "Non-compliant Traffic",
+      "Statistical anomalies",
+      "Telemetry missing",
+    ],
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [33, 53, 85, 41, 44, 65],
-        borderColor: '#5F8BB1',
-        backgroundColor: '#5F8BB1',
+        data: [
+          sumBadBots,
+          sumDataTampering,
+          sumNonCompliantTraffic,
+          sumStatisticalAnomalies,
+          sumTelemetryMissing,
+        ],
+        borderColor: "#5F8BB1",
+        backgroundColor: "#5F8BB1",
       },
     ],
   };
@@ -147,48 +249,25 @@ function FraudAnalysisView() {
           )}
         </Widget>
         <Widget title={"Traffic Veracity"}>
-          <p>{range}</p>
-          {loading && <div>A moment please...</div>}
-          {error && (
-            <div>{`There is a problem fetching the post data - ${error}`}</div>
-          )}
-          {threatsData &&
-            threatsData.map(({ day, risk, total }) => (
-              <div key={day}>
-                <p>
-                  <b>day:</b> {day}
-                </p>
-                <p>invalid: {risk.invalid}</p>
-                <p>suspicious: {risk.suspicious}</p>
-                <p>legitimate: {risk.legitimate}</p>
-                <h3>total: {total}</h3>
-              </div>
-            ))}
+          <div className="fraud-analysis__widgets--traffic-veracity">
+            <aside>
+              {loading && <div>A moment please...</div>}
+              {error && (
+                <div>{`There is a problem fetching the post data - ${error}`}</div>
+              )}
+              {threatsData && <Doughnut options={optionsPie} data={dataPie} />}
+            </aside>
+            <aside>
+              <p>test</p>
+            </aside>
+          </div>
         </Widget>
         <Widget title={"Threat Distribution"}>
-          {/* <BarGraph /> */}
-          <Bar options={options} data={data} />
           {loading && <div>A moment please...</div>}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
           )}
-          {threatsData &&
-            threatsData.map(({ day, threats }) => (
-              <div key={day}>
-                <p>
-                  <b>day:</b> {day}
-                </p>
-                <p>threats.BadBot: {threats.BadBot}</p>
-                <p>threats.DataTampering: {threats.DataTampering}</p>
-                <p>
-                  threats.NonCompliantTraffic: {threats.NonCompliantTraffic}
-                </p>
-                <p>
-                  threats.StatisticalOutliers: {threats.StatisticalOutliers}
-                </p>
-                <p>threats.TelemetryMissing: {threats.TelemetryMissing}</p>
-              </div>
-            ))}
+          {threatsData && <Bar options={optionsBar} data={dataBar} />}
         </Widget>
       </div>
       <CentralContent title={"The Table"} />

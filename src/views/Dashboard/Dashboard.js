@@ -16,26 +16,26 @@ import info_circle from "../../assets/icons/info_circle.svg";
 import {
   Chart as ChartJS,
   ArcElement,
-  Tooltip,
-  Legend,
   CategoryScale,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
+  Tooltip,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   ArcElement,
-  Tooltip,
-  Legend,
   CategoryScale,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
-  Title
+  PointElement,
+  Title,
+  Tooltip,
 );
 
 function DashboardView() {
