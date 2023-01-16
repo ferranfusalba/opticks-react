@@ -1,0 +1,30 @@
+.traffic-value {
+  display: flex;
+  flex-direction: row;
+  &__ellipse {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 100%;
+    background: radial-gradient(circle, white 25%, transparent 25%);
+    &--orange {
+      background-color: #FEB031;
+    }
+    &--red {
+      background-color: #F05641;
+    }
+    &--green {
+      background-color: #25D184;
+    }
+  }
+  b {
+    font: {
+      weight: 500;
+    }
+  }
+  p {
+    margin: 0;
+    font: {
+      weight: 300;
+    }
+  }
+}

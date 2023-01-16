@@ -7,6 +7,8 @@
     &--invalid-traffic--range-less {
       display: flex;
       justify-content: center;
+      align-items: center;
+      height: 100%;
       section {
         display: flex;
         gap: .5rem;
@@ -24,8 +26,12 @@
       }
     }
     &--traffic-veracity {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      & > * {
+        width: 50%;
+      }
     }
   }
 }

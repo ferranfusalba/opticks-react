@@ -8,6 +8,7 @@ import "./Dashboard.scss";
 import CentralContent from "../../components/CentralContent/CentralContent";
 import Range from "../../components/Range/Range";
 import Widget from "../../components/Widget/Widget";
+import TrafficValue from "../../components/TrafficValue/TrafficValue";
 
 // Assets
 import info_circle from "../../assets/icons/info_circle.svg";
@@ -122,7 +123,7 @@ function DashboardView() {
   const optionsPie = {
     plugins: {
       legend: {
-        position: "right",
+        display: false,
       },
     },
   };
@@ -132,8 +133,7 @@ function DashboardView() {
     datasets: [
       {
         data: [sumSuspicious, sumInvalid, sumLegitimate],
-        borderWidth: 2,
-        backgroundColor: ["#F05641", "#FEB031", "#25D184"],
+        backgroundColor: ["#FEB031", "#F05641", "#25D184"],
       },
     ],
   };
@@ -181,12 +181,12 @@ function DashboardView() {
               </section>
             </div>
           )}
-          {loading && <div>A moment please...</div>}
+          {/* {loading && <div>A moment please...</div>} */}
           {error && (
             <div>{`There is a problem fetching the post data - ${error}`}</div>
           )}
           {threatsData && rangeMoreVisible && (
-            <Line options={optionsLine} data={dataLine} />
+            <Line options={optionsLine} data={dataLine} height={80} />
           )}
         </Widget>
         <Widget title={"Traffic Veracity"}>
@@ -199,7 +199,9 @@ function DashboardView() {
               {threatsData && <Doughnut options={optionsPie} data={dataPie} />}
             </aside>
             <aside>
-              <p>test</p>
+              <TrafficValue color={'red'} number={sumInvalid} type={'Invalid'}/>
+              <TrafficValue color={'orange'} number={sumSuspicious} type={'Suspicious'}/>
+              <TrafficValue color={'green'} number={sumLegitimate} type={'Legitimate'}/>
             </aside>
           </div>
         </Widget>

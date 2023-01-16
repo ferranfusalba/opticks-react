@@ -1,6 +1,7 @@
 .widget {
   display: flex;
   flex-direction: column;
+  gap: .75rem;
   background: #ffffff;
   box-shadow: 0.125rem 0.125rem 0.5rem rgba(11, 18, 24, 0.1);
   border-radius: 0.3125rem;

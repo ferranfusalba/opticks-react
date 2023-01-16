@@ -8,6 +8,7 @@ import "./FraudAnalysis.scss";
 import CentralContent from "../../components/CentralContent/CentralContent";
 import Range from "../../components/Range/Range";
 import Widget from "../../components/Widget/Widget";
+import TrafficValue from "../../components/TrafficValue/TrafficValue";
 
 // Charts
 import {
@@ -94,7 +95,6 @@ function FraudAnalysisView() {
           );
         }
         let actualData = await response.json();
-        console.log("actualData", actualData);
 
         // Risk - Invalid
         const invalidArray = actualData.map(({ risk }) => risk.invalid);
@@ -123,23 +123,43 @@ function FraudAnalysisView() {
         setSumBadBots(totalBadBots);
 
         // Threats - Data Tampering
-        const dataTamperingArray = actualData.map(({ threats }) => threats.DataTampering);
-        const totalDataTampering = dataTamperingArray.reduce((acc, day) => acc + day, 0);
+        const dataTamperingArray = actualData.map(
+          ({ threats }) => threats.DataTampering
+        );
+        const totalDataTampering = dataTamperingArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
         setSumDataTampering(totalDataTampering);
 
         // Threats - Non-compliant Traffic
-        const nonCompliantTrafficArray = actualData.map(({ threats }) => threats.NonCompliantTraffic);
-        const totalNonCompliantTraffic = nonCompliantTrafficArray.reduce((acc, day) => acc + day, 0);
+        const nonCompliantTrafficArray = actualData.map(
+          ({ threats }) => threats.NonCompliantTraffic
+        );
+        const totalNonCompliantTraffic = nonCompliantTrafficArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
         setSumNonCompliantTraffic(totalNonCompliantTraffic);
 
         // Threats - Statistical anomalies
-        const statisticalAnomaliesArray = actualData.map(({ threats }) => threats.StatisticalOutliers);
-        const totalStatisticalAnomalies = statisticalAnomaliesArray.reduce((acc, day) => acc + day, 0);
+        const statisticalAnomaliesArray = actualData.map(
+          ({ threats }) => threats.StatisticalOutliers
+        );
+        const totalStatisticalAnomalies = statisticalAnomaliesArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
         setSumStatisticalAnomalies(totalStatisticalAnomalies);
 
         // Threats - Telemetry missing
-        const telemetryMissingArray = actualData.map(({ threats }) => threats.TelemetryMissing);
-        const totalTelemetryMissing = telemetryMissingArray.reduce((acc, day) => acc + day, 0);
+        const telemetryMissingArray = actualData.map(
+          ({ threats }) => threats.TelemetryMissing
+        );
+        const totalTelemetryMissing = telemetryMissingArray.reduce(
+          (acc, day) => acc + day,
+          0
+        );
         setSumTelemetryMissing(totalTelemetryMissing);
 
         // All data
@@ -159,7 +179,7 @@ function FraudAnalysisView() {
   const optionsPie = {
     plugins: {
       legend: {
-        position: "right",
+        display: false
       },
     },
   };
@@ -169,8 +189,7 @@ function FraudAnalysisView() {
     datasets: [
       {
         data: [sumSuspicious, sumInvalid, sumLegitimate],
-        borderWidth: 2,
-        backgroundColor: ["#F05641", "#FEB031", "#25D184"],
+        backgroundColor: ["#FEB031", "#F05641", "#25D184"],
       },
     ],
   };
@@ -258,7 +277,21 @@ function FraudAnalysisView() {
               {threatsData && <Doughnut options={optionsPie} data={dataPie} />}
             </aside>
             <aside>
-              <p>test</p>
+              <TrafficValue
+                color={"red"}
+                number={sumInvalid}
+                type={"Invalid"}
+              />
+              <TrafficValue
+                color={"orange"}
+                number={sumSuspicious}
+                type={"Suspicious"}
+              />
+              <TrafficValue
+                color={"green"}
+                number={sumLegitimate}
+                type={"Legitimate"}
+              />
             </aside>
           </div>
         </Widget>
