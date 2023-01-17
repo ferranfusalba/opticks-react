@@ -62,5 +62,31 @@
         justify-content: center;
       }
     }
+    &--threat-distribution {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      gap: var(--spacing-s);
+      & > * {
+        width: 50%;
+      }
+      & > *:nth-child(1) {
+        display: flex;
+        align-items: center;
+      }
+      & > *:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        // gap: var(--spacing-2xs);
+        align-items: flex-start;
+        justify-content: space-between;
+        p {
+          margin: 0;
+          font: {
+            weight: 300;
+          }
+        }
+      }
+    }
   }
 }

@@ -183,6 +183,7 @@ function FraudAnalysisView() {
         display: false,
       },
     },
+    cutout: 70
   };
 
   const dataPie = {
@@ -200,7 +201,7 @@ function FraudAnalysisView() {
     indexAxis: "y",
     elements: {
       bar: {
-        borderWidth: 2,
+        borderWidth: 0,
       },
     },
     responsive: true,
@@ -213,7 +214,19 @@ function FraudAnalysisView() {
       },
     },
     scales: {
-      x: { reverse: true },
+      x: {
+        display: false,
+        reverse: true,
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
     },
   };
 
@@ -234,8 +247,10 @@ function FraudAnalysisView() {
           sumStatisticalAnomalies,
           sumTelemetryMissing,
         ],
-        borderColor: "#5F8BB1",
         backgroundColor: "#5F8BB1",
+        // barThickness: 7,
+        // barPercentage: 1,
+        // categoryPercentage: 1
       },
     ],
   };
@@ -300,11 +315,22 @@ function FraudAnalysisView() {
           </div>
         </Widget>
         <Widget title={"Threat Distribution"}>
-          {loading && <div>Loading...</div>}
-          {error && (
-            <div>{`There is a problem fetching the post data - ${error}`}</div>
-          )}
-          {threatsData && <Bar options={optionsBar} data={dataBar} />}
+          <div className="fraud-analysis__widgets--threat-distribution">
+            <aside>
+              {loading && <div>Loading...</div>}
+              {error && (
+                <div>{`There is a problem fetching the post data - ${error}`}</div>
+              )}
+              {threatsData && <Bar options={optionsBar} data={dataBar} />}
+            </aside>
+            <aside>
+              <p>Bad Bots</p>
+              <p>Data Tampering</p>
+              <p>Non-compliant Traffic</p>
+              <p>Statistical anomalies</p>
+              <p>Telemetry missing</p>
+            </aside>
+          </div>
         </Widget>
       </div>
       <CentralContent title={"The Table"} />

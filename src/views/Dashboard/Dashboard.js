@@ -126,6 +126,7 @@ function DashboardView() {
         display: false,
       },
     },
+    cutout: 70
   };
 
   const dataPie = {
@@ -146,6 +147,18 @@ function DashboardView() {
         position: "bottom",
       },
     },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        }
+      }
+    }
   };
 
   const dataLine = {
