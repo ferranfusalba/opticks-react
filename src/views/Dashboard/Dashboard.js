@@ -93,7 +93,7 @@ function DashboardView() {
         setSumLegitimate(totalLegitimate);
 
         // Dates
-        const weeklyDays = actualData.map(({ day }) => day);
+        const weeklyDays = actualData.map(({ day }) => day.slice(0, -5).replace("-", "/"));
         setWeeklyDates(weeklyDays);
 
         // All data
