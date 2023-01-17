@@ -1,13 +1,38 @@
 .element {
-  & > * {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-l);
+  & > :nth-child(2) {
     display: flex;
     flex-direction: row;
     gap: var(--spacing-l);
     text-decoration: none;
-    color: var(--white);
 
     font: {
       size: var(--font-size-m);
+    }
+  }
+  &--statusbar {
+    width: var(--spacing-4xs);
+    height: var(--spacing-4xl);
+    border-radius: 0 var(--spacing-2xl) var(--spacing-2xl) 0;
+  }
+  // Route status class management
+  &--active {
+    .element--statusbar {
+      background-color: var(--white);
+    }
+    :nth-child(2) {
+      color: var(--white);
+    }
+  }
+  &--unactive {
+    .element--statusbar {
+      background-color: var(--blue);
+    }
+    :nth-child(2) {
+      color: var(--white);
+      opacity: 0.6;
     }
   }
 }
@@ -16,12 +41,12 @@
   display: flex;
   flex-direction: column;
   background-color: var(--blue);
-  padding: var(--spacing-xs) 1.25rem;
 }
 
 .sidebar--title {
   color: var(--white);
   opacity: 0.6;
+  padding-left: 1.25rem;
 
   font: {
     size: var(--font-size-s);
