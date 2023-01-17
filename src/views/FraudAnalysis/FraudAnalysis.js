@@ -37,6 +37,7 @@ ChartJS.register(
   Title,
   Tooltip
 );
+ChartJS.defaults.font.family = "Roboto";
 
 function FraudAnalysisView() {
   const [loading, setLoading] = useState(true);
@@ -210,6 +211,9 @@ function FraudAnalysisView() {
       title: {
         display: false,
       },
+    },
+    scales: {
+      x: { reverse: true },
     },
   };
 
