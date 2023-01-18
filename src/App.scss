@@ -5,8 +5,8 @@
     height: calc(100vh - var(--header-desktop));
     & > *:nth-child(2) {
       display: grid;
-      gap: var(--spacing-l);
       grid-template-rows: 1fr 6fr 12fr;
+      gap: var(--spacing-l);
       padding: var(--spacing-l) var(--spacing-2xl);
       background-color: var(--whitesecondary);
     }

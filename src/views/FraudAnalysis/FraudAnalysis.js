@@ -14,7 +14,7 @@ import TrafficValue from "../../components/TrafficValue/TrafficValue";
 import info_circle from "../../assets/icons/info_circle.svg";
 
 // Plugins
-import DoughnutInnerText from '../../plugins/plugin';
+import DoughnutInnerText from '../../plugins/DoughnutInnerText';
 
 // Charts
 import {

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s);
+  padding: var(--spacing-l) var(--spacing-2xl);
   background: #ffffff;
   box-shadow: var(--spacing-5xs) var(--spacing-5xs) var(--spacing-2xs) rgba(11, 18, 24, 0.1);
   border-radius: 0.3125rem;
-  padding: var(--spacing-l) var(--spacing-2xl);
   h3 {
     margin: 0;
     font: {

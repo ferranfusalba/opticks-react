@@ -1,11 +1,11 @@
 .central {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: var(--white);
   box-shadow: var(--spacing-5xs) var(--spacing-5xs) var(--spacing-2xs) rgba(11, 18, 24, 0.1);
   border-radius: 0.3125rem;
   p {
-    color: var(--greyprimary);
+    color: var(--grey);
   }
 }

@@ -1,4 +1,4 @@
-const plugin = {
+const DoughnutInnerTextPlugin = {
   id: "doughnutInnerText",
   beforeDraw: (chart) => {
     if (!chart.options.centerText) {
@@ -34,4 +34,4 @@ const plugin = {
   },
 };
 
-export default plugin;
+export default DoughnutInnerTextPlugin;

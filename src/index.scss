@@ -1,17 +1,16 @@
 :root {
   // Color variables
-  --green: #25D184;
-  --orange: #FEB031;
-  --red: #F05641;
-  --blue: #00447F;
-  --bluesecondary: #5F8BB1;
-  --bluetertiary: #0062b8;
+  --primary: #00447F;
+  --secondary: #0062b8;
+  --success: #25D184;
+  --danger: #F05641;
+  --alert: #FEB031;
   --white: #FFFFFF;
   --whitesecondary: #f8f8f8;
   --whitetertiary: #dee9fd;
-  --black: #000000;
-  --greyprimary: #8e8e8e;
+  --grey: #8e8e8e;
   --greysecondary: #757575;
+  --black: #000000;
   // Font size variables
   --font-size-xs: .625rem;
   --font-size-s: .75rem;

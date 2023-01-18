@@ -1,20 +1,19 @@
 .traffic-value {
   display: flex;
-  flex-direction: row;
   gap: var(--spacing-4xs);
   &__ellipse {
     height: var(--spacing-l);
     width: var(--spacing-l);
     border-radius: 100%;
     background: radial-gradient(circle, white 25%, transparent 25%);
-    &--orange {
-      background-color: var(--orange);
+    &--alert {
+      background-color: var(--alert);
     }
-    &--red {
-      background-color: var(--red);
+    &--danger {
+      background-color: var(--danger);
     }
-    &--green {
-      background-color: var(--green);
+    &--success {
+      background-color: var(--success);
     }
   }
   p {

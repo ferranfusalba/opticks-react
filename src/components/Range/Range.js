@@ -1,9 +1,6 @@
 // Styles
 import "./Range.scss";
 
-// Assets
-import calendar_selected from "../../assets/icons/calendar_selected.svg";
-
 function RangeWrapper({range, setRange}) {
   const handleOnChange = (e) => {
     setRange(e.target.value);
@@ -18,7 +15,6 @@ function RangeWrapper({range, setRange}) {
 
   return (
     <div className="range-wrapper">
-      {/* <img src={calendar_selected} alt={"Calendar Selected Icon"} /> */}
       <select value={range} onChange={handleOnChange}>
         {options.map(({ value, label }, index) => (
           <option value={value} key={index}>
