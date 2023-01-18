@@ -1,9 +1,9 @@
 .range-wrapper {
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
   select {
     width: 9rem;
+    max-height: var(--spacing-4xl);
     padding: 0.1875rem 1.5625rem 0.1875rem var(--spacing-2xs);
     border: .0625rem solid #eaeaea;
     border-radius: var(--spacing-3xs);

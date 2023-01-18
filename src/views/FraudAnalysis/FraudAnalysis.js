@@ -10,6 +10,12 @@ import Range from "../../components/Range/Range";
 import Widget from "../../components/Widget/Widget";
 import TrafficValue from "../../components/TrafficValue/TrafficValue";
 
+// Assets
+import info_circle from "../../assets/icons/info_circle.svg";
+
+// Plugins
+import DoughnutInnerText from '../../plugins/plugin';
+
 // Charts
 import {
   Chart as ChartJS,
@@ -21,7 +27,7 @@ import {
   LineElement,
   PointElement,
   Title,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
@@ -30,12 +36,13 @@ ChartJS.register(
   ArcElement,
   BarElement,
   CategoryScale,
+  DoughnutInnerText,
   Legend,
   LinearScale,
   LineElement,
   PointElement,
   Title,
-  Tooltip
+  Tooltip,
 );
 ChartJS.defaults.font.family = "Roboto";
 
@@ -50,6 +57,10 @@ function FraudAnalysisView() {
   const [sumInvalid, setSumInvalid] = useState(null);
   const [sumSuspicious, setSumSuspicious] = useState(null);
   const [sumLegitimate, setSumLegitimate] = useState(null);
+  // String versions
+  const [sumInvalidString, setSumInvalidString] = useState(null);
+  const [sumSuspiciousString, setSumSuspiciousString] = useState(null);
+  const [sumLegitimateString, setSumLegitimateString] = useState(null);
 
   // Section: Threat distribution
   const [sumBadBots, setSumBadBots] = useState(null);
@@ -101,6 +112,7 @@ function FraudAnalysisView() {
         const invalidArray = actualData.map(({ risk }) => risk.invalid);
         const totalInvalid = invalidArray.reduce((acc, day) => acc + day, 0);
         setSumInvalid(totalInvalid);
+        setSumInvalidString(totalInvalid.toLocaleString('en-GB'));
 
         // Risk - Suspicious
         const suspiciousArray = actualData.map(({ risk }) => risk.suspicious);
@@ -109,6 +121,7 @@ function FraudAnalysisView() {
           0
         );
         setSumSuspicious(totalSuspicious);
+        setSumSuspiciousString(totalSuspicious.toLocaleString('en-GB'));
 
         // Risk - Legitimate
         const legitimateArray = actualData.map(({ risk }) => risk.legitimate);
@@ -117,6 +130,7 @@ function FraudAnalysisView() {
           0
         );
         setSumLegitimate(totalLegitimate);
+        setSumLegitimateString(totalLegitimate.toLocaleString('en-GB'));
 
         // Threats - Bad Bots
         const badBotsArray = actualData.map(({ threats }) => threats.BadBot);
@@ -183,7 +197,13 @@ function FraudAnalysisView() {
         display: false,
       },
     },
-    cutout: 70
+    cutout: 40,
+    centerText: {
+      color: "#000",
+      value: (sumInvalid + sumSuspicious + sumLegitimate).toLocaleString('en-GB'),
+      fontSizeAdjust: -0.2,
+      fontFamilyAdjust: 'Roboto'
+    }
   };
 
   const dataPie = {
@@ -248,9 +268,6 @@ function FraudAnalysisView() {
           sumTelemetryMissing,
         ],
         backgroundColor: "#5F8BB1",
-        // barThickness: 7,
-        // barPercentage: 1,
-        // categoryPercentage: 1
       },
     ],
   };
@@ -269,18 +286,18 @@ function FraudAnalysisView() {
               <section>
                 <span>Total saved</span>
                 <br />
-                {savingsData.total}
+                {savingsData.total.toLocaleString('en-GB')} €
               </section>
               <section>
                 <aside>
                   <span>Last 30 days</span>
                   <br />
-                  {savingsData.last30days}
+                  {savingsData.last30days.toLocaleString('en-GB')} €
                 </aside>
                 <aside>
-                  <span>Next 30 days projection</span>
+                  <span>Next 30 days projection <img src={info_circle} alt={"Info circle icon"} /></span>
                   <br />
-                  {savingsData.next30days}
+                  {savingsData.next30days.toLocaleString('en-GB')} €
                 </aside>
               </section>
             </main>
@@ -298,17 +315,17 @@ function FraudAnalysisView() {
             <aside>
               <TrafficValue
                 color={"red"}
-                number={sumInvalid}
+                number={sumInvalidString}
                 type={"Invalid"}
               />
               <TrafficValue
                 color={"orange"}
-                number={sumSuspicious}
+                number={sumSuspiciousString}
                 type={"Suspicious"}
               />
               <TrafficValue
                 color={"green"}
-                number={sumLegitimate}
+                number={sumLegitimateString}
                 type={"Legitimate"}
               />
             </aside>
@@ -321,7 +338,7 @@ function FraudAnalysisView() {
               {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
               )}
-              {threatsData && <Bar options={optionsBar} data={dataBar} />}
+              {threatsData && <Bar options={optionsBar} data={dataBar} height={250}/>}
             </aside>
             <aside>
               <p>Bad Bots</p>

@@ -13,6 +13,9 @@ import TrafficValue from "../../components/TrafficValue/TrafficValue";
 // Assets
 import info_circle from "../../assets/icons/info_circle.svg";
 
+// Plugins
+import DoughnutInnerText from "../../plugins/plugin";
+
 // Charts
 import {
   Chart as ChartJS,
@@ -31,13 +34,15 @@ import { Line } from "react-chartjs-2";
 ChartJS.register(
   ArcElement,
   CategoryScale,
+  DoughnutInnerText,
   Legend,
   LinearScale,
   LineElement,
   PointElement,
   Title,
-  Tooltip,
+  Tooltip
 );
+ChartJS.defaults.font.family = "Roboto";
 
 function DashboardView() {
   const [loading, setLoading] = useState(true);
@@ -49,6 +54,10 @@ function DashboardView() {
   const [sumInvalid, setSumInvalid] = useState(null);
   const [sumSuspicious, setSumSuspicious] = useState(null);
   const [sumLegitimate, setSumLegitimate] = useState(null);
+  // String versions
+  const [sumInvalidString, setSumInvalidString] = useState(null);
+  const [sumSuspiciousString, setSumSuspiciousString] = useState(null);
+  const [sumLegitimateString, setSumLegitimateString] = useState(null);
 
   // Section: Invalid traffic
   const [rangeLessVisible, setRangeLessVisible] = useState(false);
@@ -75,6 +84,7 @@ function DashboardView() {
         setInvalidDays(invalidArray);
         const totalInvalid = invalidArray.reduce((acc, day) => acc + day, 0);
         setSumInvalid(totalInvalid);
+        setSumInvalidString(totalInvalid.toLocaleString("en-GB"));
 
         // Risk - Suspicious
         const suspiciousArray = actualData.map(({ risk }) => risk.suspicious);
@@ -83,6 +93,7 @@ function DashboardView() {
           0
         );
         setSumSuspicious(totalSuspicious);
+        setSumSuspiciousString(totalSuspicious.toLocaleString("en-GB"));
 
         // Risk - Legitimate
         const legitimateArray = actualData.map(({ risk }) => risk.legitimate);
@@ -91,9 +102,12 @@ function DashboardView() {
           0
         );
         setSumLegitimate(totalLegitimate);
+        setSumLegitimateString(totalLegitimate.toLocaleString("en-GB"));
 
         // Dates
-        const weeklyDays = actualData.map(({ day }) => day.slice(0, -5).replace("-", "/"));
+        const weeklyDays = actualData.map(({ day }) =>
+          day.slice(0, -5).replace("-", "/")
+        );
         setWeeklyDates(weeklyDays);
 
         // All data
@@ -126,7 +140,15 @@ function DashboardView() {
         display: false,
       },
     },
-    cutout: 70
+    cutout: 40,
+    centerText: {
+      color: "#000",
+      value: (sumInvalid + sumSuspicious + sumLegitimate).toLocaleString(
+        "en-GB"
+      ),
+      fontSizeAdjust: -0.2,
+      fontFamilyAdjust: "Roboto",
+    },
   };
 
   const dataPie = {
@@ -145,20 +167,27 @@ function DashboardView() {
     plugins: {
       legend: {
         position: "bottom",
+        labels: {
+          color: "black",
+          font: {
+            size: 14,
+            weight: 300,
+          },
+        },
       },
     },
     scales: {
       x: {
         grid: {
-          display: false
-        }
+          display: false,
+        },
       },
       y: {
         grid: {
-          display: false
-        }
-      }
-    }
+          display: false,
+        },
+      },
+    },
   };
 
   const dataLine = {
@@ -170,6 +199,7 @@ function DashboardView() {
         data: invalidDays,
         borderColor: "#F05641",
         backgroundColor: "#F05641",
+        borderWidth: 2,
         pointStyle: false,
         tension: 0.5,
       },
@@ -181,26 +211,31 @@ function DashboardView() {
       <Range range={range} setRange={setRange} />
       <div className="dashboard__widgets">
         <Widget title={"Invalid Traffic over time"}>
-          {rangeLessVisible && (
-            <div className="dashboard__widgets--invalid-traffic--range-less">
-              <section>
-                <aside>
-                  <img src={info_circle} alt={"Info circle icon"} />
-                </aside>
-                <article>
-                  <b>Select a wider range</b>
-                  <br />A minimum of 2 days of data is needed in order to
-                  display these metrics.
-                </article>
-              </section>
-            </div>
-          )}
-          {error && (
-            <div>{`There is a problem fetching the post data - ${error}`}</div>
-          )}
-          {threatsData && rangeMoreVisible && (
-            <Line options={optionsLine} data={dataLine} height={80} />
-          )}
+          <div className="dashboard__widgets--invalid-traffic">
+            {rangeLessVisible && (
+              <div className="dashboard__widgets--invalid-traffic--range-less">
+                <section>
+                  <aside>
+                    <img src={info_circle} alt={"Info circle icon"} />
+                  </aside>
+                  <article>
+                    <b>Select a wider range</b>
+                    <br />A minimum of 2 days of data is needed in order to
+                    display these metrics.
+                  </article>
+                </section>
+              </div>
+            )}
+            {error && (
+              <div>{`There is a problem fetching the post data - ${error}`}</div>
+            )}
+            {threatsData && rangeMoreVisible && (
+              <div className="dashboard__widgets--invalid-traffic--range-more">
+                <aside>Number of visits</aside>
+                <Line options={optionsLine} data={dataLine} height={70} />
+              </div>
+            )}
+          </div>
         </Widget>
         <Widget title={"Traffic Veracity"}>
           <div className="dashboard__widgets--traffic-veracity">
@@ -212,9 +247,21 @@ function DashboardView() {
               {threatsData && <Doughnut options={optionsPie} data={dataPie} />}
             </aside>
             <aside>
-              <TrafficValue color={'red'} number={sumInvalid} type={'Invalid'}/>
-              <TrafficValue color={'orange'} number={sumSuspicious} type={'Suspicious'}/>
-              <TrafficValue color={'green'} number={sumLegitimate} type={'Legitimate'}/>
+              <TrafficValue
+                color={"red"}
+                number={sumInvalidString}
+                type={"Invalid"}
+              />
+              <TrafficValue
+                color={"orange"}
+                number={sumSuspiciousString}
+                type={"Suspicious"}
+              />
+              <TrafficValue
+                color={"green"}
+                number={sumLegitimateString}
+                type={"Legitimate"}
+              />
             </aside>
           </div>
         </Widget>

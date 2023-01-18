@@ -1,14 +1,9 @@
 .App {
   .layout-content {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
     height: calc(100vh - var(--header-desktop));
-    & > *:nth-child(1) {
-      width: 15%;
-    }
     & > *:nth-child(2) {
-      width: 85%;
       display: grid;
       gap: var(--spacing-l);
       grid-template-rows: 1fr 6fr 12fr;
@@ -16,8 +11,4 @@
       background-color: var(--whitesecondary);
     }
   }
-}
-
-h3 {
-  margin: 0;
 }
