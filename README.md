@@ -1,3 +1,28 @@
+# Opticks Test in React
+
+## Welcome
+
+Welcome to Opticks' Dashboard & Fraud Analysis app. This project was created with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation
+
+1. Clone this repository by copying the `ssh` url.
+2. Open terminal in your computer and run `git clone ` and the copied url. Make sure you do it on a folder you choose! Navigate through `cd ` + folder name, or make a new directory with `mkdir ` + folder name. In any case, you can always run `pwd` on the same terminal window to know where you are.
+3. In the same terminal window, after the clone is finished, you can run `npm i` to install all packages needed for this project.
+
+## Launch
+
+1. Once the installation is done, launch the application with `npm start`. It can be done on the same terminal window that has finished installing the packages.
+2. After some seconds, if the launch is successful, a new tab will open on your default browser. If you don't have any React app open at the same time, it will mostly open the app on `localhost:3000`.
+
+## Navigation
+
+1. The app consists of two views: Dashboard and Fraud Analysis. Both views have widgets with numeric & graphic data that will give you an insight of the company's metrics. Inside every view, a selector has been placed to filter the data depending on a date range. For a better experience, make sure you run the app on a desktop environment.
+
+---
+
+### Original README created by `create-react-app`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
