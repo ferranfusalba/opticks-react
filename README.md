@@ -8,7 +8,7 @@ Welcome to Opticks' Dashboard & Fraud Analysis app. This project was created wit
 
 1. Clone this repository by copying the `ssh` url. This is provided by Github on the green, `Code` button of this repository website. If you prefer it, you can also clone it through `https` url, although `ssh` is more recommended.
 2. Open terminal in your computer and run `git clone ` and the copied url. Make sure you do it on a folder you choose! Navigate through `cd ` + folder name, or make a new directory with `mkdir ` + folder name. In any case, you can always run `pwd` on the same terminal window to know where you are.
-3. In the same terminal window, after the clone is finished, you can run `npm i` to install all packages needed for this project.
+3. In the same terminal window, after the clone is finished, go to the cloned folder (`cd opticks-react`) and run `npm i` to install all packages needed for this project.
 
 ## Launch
 
