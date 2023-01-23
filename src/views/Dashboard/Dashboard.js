@@ -248,17 +248,17 @@ function DashboardView() {
             </aside>
             <aside>
               <TrafficValue
-                color={"red"}
+                color={"danger"}
                 number={sumInvalidString}
                 type={"Invalid"}
               />
               <TrafficValue
-                color={"orange"}
+                color={"alert"}
                 number={sumSuspiciousString}
                 type={"Suspicious"}
               />
               <TrafficValue
-                color={"green"}
+                color={"success"}
                 number={sumLegitimateString}
                 type={"Legitimate"}
               />
